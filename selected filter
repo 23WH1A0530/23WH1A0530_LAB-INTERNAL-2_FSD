@@ -1,0 +1,22 @@
+function updateQueryParams(filters) {
+  const url = new URL(window.location.href);
+
+  Object.keys(filters).forEach((key) => {
+    const value = filters[key];
+
+    if (value === null || value === undefined || value === "") {
+      url.searchParams.delete(key);
+    } else {
+      url.searchParams.set(key, value);
+    }
+  });
+
+  window.history.replaceState({}, "", url);
+}
+const selectedFilters = {
+  category: "books",
+  sort: "price_asc",
+  rating: "4"
+};
+
+updateQueryParams(selectedFilters);
